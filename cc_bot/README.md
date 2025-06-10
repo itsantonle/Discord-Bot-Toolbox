@@ -9,3 +9,7 @@ Uses the (!) or exclaimation mark to take commands
 ```txt
 !hello
 ```
+
+### Deployment
+
+Deployment will either be on Replit or Render

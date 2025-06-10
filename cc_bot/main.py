@@ -71,7 +71,28 @@ async def unassign(ctx):
     else: 
         await ctx.send("Role doesn't exist!")
 
-# direct DM functionality
+# direct DM functionality gets the message after command
+# !dm {msg} gets the msg after the command
+@bot.command()
+async def dm(ctx,*, msg): 
+    await ctx.author.send(f"You said {msg}")
+    
+#   literally replies to the message
+@bot.command()
+async def reply(ctx): 
+    await ctx.reply("This is a reply to your message")
+    
+
+# embed and poll-like
+@bot.command()
+async def poll(ctx, *, question): 
+    embed = discord.Embed(title="Poll", description=question)
+    # send embedded message
+    poll_messsage = await ctx.send(embed=embed)
+    # win + period
+    await poll_messsage.add_reaction("👍")
+    
+    
 
 # commands based on user role 
 @bot.command()

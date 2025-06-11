@@ -27,9 +27,16 @@ class ChannelReactionHandler(commands.Cog):
     @commands.command()
     async def setup_roles(self,ctx: commands.Context):
         try: 
-    
+            # automate making the roles
+            guild = ctx.guild
+            for role_name in self.emojimap.values():
+                existing_role = discord.utils.get(guild.roles, name=role_name)
+                if not existing_role:
+                    await guild.create_role(name=role_name)
+                    await ctx.send(f"✅ Created role: **{role_name}**")
+             
+             # embed message       
             embed_msg = discord.Embed(title="Role Management", description="React to this message to get a role!", color=discord.Color.brand_green())
-         
             embed_msg.set_author(name=f"Prompted by {ctx.author.name}", icon_url=ctx.author.avatar)
             embed_msg.add_field(name="Available Roles!", value="🔥- Fire ❄️- Ice 🌱-Nature")
             
@@ -55,12 +62,14 @@ class ChannelReactionHandler(commands.Cog):
 
             guild = self.bot.get_guild(payload.guild_id)
             emoji = str(payload.emoji)
-            role_name = EMOJI_ROLE_MAP.get(emoji)
+            role_name = self.emojimap.get(emoji)
 
             if role_name:
                 role = discord.utils.get(guild.roles, name=role_name)
                 if role:
                     await payload.member.add_roles(role)
+                    if guild.system_channel:
+                        await guild.system_channel.send(f"{payload.member.mention} was given the **{role.name}** role! 🎉")
         except Exception as e: 
             print('⚠️ An Error Occurred in the Bot code: ' + str(e))
     
@@ -76,12 +85,14 @@ class ChannelReactionHandler(commands.Cog):
                 return
 
             emoji = str(payload.emoji)
-            role_name = EMOJI_ROLE_MAP.get(emoji)
+            role_name = self.emojimap.get(emoji)
 
             if role_name:
                 role = discord.utils.get(guild.roles, name=role_name)
                 if role:
                     await member.remove_roles(role)
+                    if guild.system_channel:
+                        await guild.system_channel.send(f"{member.mention} had the **{role.name}** role removed. ❌")
         except Exception as e: 
             print('⚠️ An Error Occurred in the Bot code: ' + str(e))
                 

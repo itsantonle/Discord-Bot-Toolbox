@@ -1,21 +1,27 @@
 package main
 
 import (
-	"fmt"
+	"cc-server/controllers"
+	"cc-server/initializers"
 
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
+	"github.com/gin-gonic/gin"
 )
 
-func main(){
-// set up main first 
-	dsn := "[LOAD USING ENV]"
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	fmt.Print(db)
-if err != nil {
-    fmt.Println("Failed to connect:", err)
-    return
+func init(){
+	initializers.LoadEnvVariables()
+	initializers.ConnectToDB()
 }
-fmt.Println("Connected to Supabase!")
+func main(){
+ r:= gin.Default()
+
+
+//  adding a GET ROUTE, works on 8080 by default
+ r.GET("/", controllers.UserGet)
+ r.GET("/:id", controllers.SingleUserGet)
+ r.POST("/post", controllers.UserCreate )
+ r.PUT("/post/:id", controllers.UpdateUser)
+ r.DELETE("/post/:id", controllers.DeleteUser)
+
+ r.Run()
 
 }

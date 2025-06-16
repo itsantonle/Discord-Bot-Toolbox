@@ -27,6 +27,9 @@ cd ./server/[server] #navigate to directory
 
 # You need to at least have compile Daemon installed
 CompileDaemon
+
+# run program too
+$ CompileDaemon -command="go run main.go"
 ```
 
 Without the Daemon
@@ -34,4 +37,12 @@ Without the Daemon
 ```bash
 cd ./server/[server]
 go run main.go
+```
+
+4. In order to migrate you need to set up the .env
+
+You can use any SQL ran database for GORM to work on it's migrations
+
+```go
+go run migrate/migrate.go
 ```

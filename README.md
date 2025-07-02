@@ -1,3 +1,9 @@
+### 🛠️ Discord Toolbox
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Go](https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white)
+![Discord.py](https://img.shields.io/badge/discord.py-5865F2?style=for-the-badge&logo=discord&logoColor=white)
+![Gin](https://img.shields.io/badge/Gin-00AFF0?style=for-the-badge&logo=go&logoColor=white)
+![GORM](https://img.shields.io/badge/GORM-7B42BC?style=for-the-badge&logo=go&logoColor=white)
 ### ⚠️Note
 ![Python](https://img.shields.io/badge/Python-3.13.3-blue?logo=python&logoColor=white)
 
